@@ -6,9 +6,9 @@ from selenium.webdriver.support import expected_conditions as EC
 from PIL import ImageGrab
 import time
 
-def detect_objetcs():
-    whole_screen = ImageGrab.grab()
-    whole_screen.save("game_image.jpg")
+def detect_objetcs(i):
+    whole_screen = ImageGrab.grab(bbox=(0, 350, 1700, 850))
+    whole_screen.save(f"screenshots/game_image{i}.jpg")
     whole_screen.close()
 
 
@@ -29,7 +29,8 @@ start_game = wait.until(EC.element_to_be_clickable((By.TAG_NAME, "body")))
 start_game.send_keys(Keys.SPACE)
 
 time.sleep(2)
-detect_objetcs()
+for i in range(60):
+    detect_objetcs(i)
 
 
     

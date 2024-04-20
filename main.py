@@ -3,7 +3,13 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from PIL import ImageGrab
+import time
 
+def detect_objetcs():
+    whole_screen = ImageGrab.grab()
+    whole_screen.save("game_image.jpg")
+    whole_screen.close()
 
 
 chrome_options = webdriver.ChromeOptions()
@@ -18,6 +24,12 @@ accept_cookies = wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="qc-c
 
 accept_cookies.click()
 
-start_game = wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="darkSwitch"]')))
+start_game = wait.until(EC.element_to_be_clickable((By.TAG_NAME, "body")))
 
-start_game.send_keys(Keys.SPACE).perform()
+start_game.send_keys(Keys.SPACE)
+
+time.sleep(2)
+detect_objetcs()
+
+
+    

@@ -28,23 +28,26 @@ def check_background_theme(image_data):
     x = 0 
     y = 300  
     color = image_data[x, y]
-    print(f"{color}")
     if color < 200:
         change_to_dark_theme()
     else:
         change_to_light_theme()
-    
+              
 def detect_object(image_data):
-    if dark_theme: 
+    if dark_theme:
         for x in range(800,960):
-            for y in range(800, 850): 
-                object_color = image_data[x, y]               
-                if object_color < 200:
-                    print(f"WHITE OBJECT {object_color}") 
-                    pyautogui.keyDown('up')
-                else:
-                    print(f"BLACK OBJECT {object_color}")  
-                    pyautogui.keyDown('up')
+                for y in range(800, 900):  
+                    object_color = image_data[x, y]               
+                    if object_color > 200:
+                        print(f"WHITE OBJECT {object_color}")
+                        pyautogui.press("space")
+    if light_theme:
+        for x in range(800,960):
+                for y in range(800, 900):          
+                    object_color = image_data[x, y]        
+                    if object_color < 200:                   
+                        print(f"BLACK OBJECT {object_color}")    
+                        pyautogui.press("space")
      
 pyautogui.hotkey('win', 'down')
 pyautogui.click()             

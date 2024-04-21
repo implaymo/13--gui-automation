@@ -50,14 +50,14 @@ def detect_object_cactus(image_data):
                         return
 def detect_object_birds(image_data):
     if dark_theme:
-        for x in range(340, 380):
+        for x in range(250, 380):
                 for y in range(750, 780):           
                     object_color = image_data[x, y]               
                     if object_color > 200:
                         pyautogui.press("space")
                         return
     if light_theme:
-        for x in range(340, 380):
+        for x in range(250, 380):
                 for y in range(750, 780):           
                     object_color = image_data[x, y]        
                     if object_color < 200:                   

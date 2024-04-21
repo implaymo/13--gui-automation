@@ -21,7 +21,8 @@ def screenshot():
     image = ImageGrab.grab().convert('L')
     image_data = image.load()
     check_background_theme(image_data)
-    detect_object(image_data)
+    detect_object_cactus(image_data)
+    detect_object_birds(image_data)
     
 def check_background_theme(image_data):
     x = 0 
@@ -32,7 +33,7 @@ def check_background_theme(image_data):
     else:
         change_to_light_theme()
               
-def detect_object(image_data):
+def detect_object_cactus(image_data):
     if dark_theme:
         for x in range(340, 380):
                 for y in range(800, 830):  
@@ -47,7 +48,23 @@ def detect_object(image_data):
                     if object_color < 200:                   
                         pyautogui.press("space")
                         return
-     
+def detect_object_birds(image_data):
+    if dark_theme:
+        for x in range(340, 380):
+                for y in range(750, 780):           
+                    object_color = image_data[x, y]               
+                    if object_color > 200:
+                        pyautogui.press("space")
+                        return
+    if light_theme:
+        for x in range(340, 380):
+                for y in range(750, 780):           
+                    object_color = image_data[x, y]        
+                    if object_color < 200:                   
+                        pyautogui.press("space")
+                        return                        
+                    
+                    
 pyautogui.hotkey('win', 'down')
 pyautogui.click()             
 pyautogui.press("space")

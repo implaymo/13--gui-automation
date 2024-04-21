@@ -18,7 +18,7 @@ def change_to_light_theme():
     return dark_theme, light_theme
 
 def screenshot(): 
-    image = ImageGrab.grab(bbox=(200, 600, 900, 870)).convert('L')
+    image = ImageGrab.grab(bbox=(200, 600, 1800, 870)).convert('L')
     image.save("game_image.jpg")
     image_data = image.load()
     check_background_theme(image_data)

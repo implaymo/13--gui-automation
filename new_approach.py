@@ -19,7 +19,6 @@ def change_to_light_theme():
 
 def screenshot(): 
     image = ImageGrab.grab().convert('L')
-    image.save("game_image.jpg")
     image_data = image.load()
     check_background_theme(image_data)
     detect_object(image_data)
@@ -35,19 +34,21 @@ def check_background_theme(image_data):
               
 def detect_object(image_data):
     if dark_theme:
-        for x in range(800,960):
+        for x in range(500,600):
                 for y in range(800, 900):  
                     object_color = image_data[x, y]               
                     if object_color > 200:
                         print(f"WHITE OBJECT {object_color}")
                         pyautogui.press("space")
+                        return
     if light_theme:
-        for x in range(800,960):
-                for y in range(800, 900):          
+        for x in range(200, 300):
+                for y in range(800, 830):          
                     object_color = image_data[x, y]        
                     if object_color < 200:                   
                         print(f"BLACK OBJECT {object_color}")    
                         pyautogui.press("space")
+                        return
      
 pyautogui.hotkey('win', 'down')
 pyautogui.click()             

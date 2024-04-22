@@ -4,8 +4,8 @@ import time
 
 light_theme = False
 dark_theme = False
-x_min = 240                          
-x_max = 350
+x_min = 360                          
+x_max = 400
 y_min_cac = 800
 y_max_cac = 830
 y_min_bird = 750

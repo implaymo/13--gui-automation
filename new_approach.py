@@ -5,12 +5,12 @@ import time
 count = 0
 light_theme = False
 dark_theme = False
-x_min_cac = 310                        
+x_min_cac = 300                        
 x_max_cac = 400
-y_min_cac = 780
-y_max_cac = 810
+y_min_cac = 790
+y_max_cac = 800
 
-x_min_bird = 420                          
+x_min_bird = 450                          
 x_max_bird = 500
 y_min_bird = 730
 y_max_bird = 735  
@@ -33,32 +33,34 @@ def change_to_light_theme():
     
 def check_background_theme(image_data):
     x = 1780
-    y = 600  
+    y = 400  
     color = image_data[x, y]
-    if color <= 90:
+    if color < 160:
         change_to_dark_theme()
     else:
         change_to_light_theme()
         
-def change_jump_timing_cactus():
+def change_jump_timing():
     global count, x_min_cac, x_max_cac
-    if count > 7:
-        x_min_cac = 370                        
-        x_max_cac = 450
-    elif count > 50:
-        x_min_cac = 430
-        x_max_cac = 550              
+    if count > 35:
+        x_min_cac = 700
+        x_max_cac = 750
+    elif count > 70:
+        x_min_cac = 850
+        x_max_cac = 900            
     return x_min_cac, x_max_cac
               
 def detect_object_cactus(image_data):
     global count
-    change_jump_timing_cactus()
+    change_jump_timing()
     if dark_theme:
         for x in range(x_min_cac, x_max_cac):
             for y in range(y_min_cac, y_max_cac):  
                 object_color = image_data[x, y]
                 if object_color > color_to_jump_dark:
                     pyautogui.press("space")
+                    count += 1
+                    print(count)
                     return
     elif light_theme:
         for x in range(x_min_cac, x_max_cac):
@@ -67,11 +69,12 @@ def detect_object_cactus(image_data):
                 if object_color < color_to_jump_light:
                     pyautogui.press("space")
                     count += 1
+                    print(count)
                     return
                     
 def detect_object_birds(image_data):
     global count
-    change_jump_timing_cactus()
+    change_jump_timing()
     if dark_theme:
          for x in range(x_min_bird, x_max_bird):
             for y in range(y_min_bird, y_max_bird):           

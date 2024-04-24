@@ -6,18 +6,18 @@ count = 0
 light_theme = False
 dark_theme = False
 x_min_cac = 300                        
-x_max_cac = 400
+x_max_cac = 320
 y_min_cac = 790
 y_max_cac = 800
 
 x_min_bird = 450                          
-x_max_bird = 500
+x_max_bird = 520
 y_min_bird = 730
 y_max_bird = 735  
  
 sleep_time = time.sleep(0)
-color_to_jump_dark = 90
-color_to_jump_light = 84      
+objects_color_light = 85
+objects_color_dark = 84      
 
 def change_to_dark_theme():       
     global light_theme, dark_theme
@@ -42,12 +42,15 @@ def check_background_theme(image_data):
         
 def change_jump_timing():
     global count, x_min_cac, x_max_cac
-    if count > 35:
-        x_min_cac = 700
-        x_max_cac = 750
+    if count > 30:
+        x_min_cac = 360
+        x_max_cac = 410        
+    elif count > 45:
+        x_min_cac = 800
+        x_max_cac = 930
     elif count > 70:
-        x_min_cac = 850
-        x_max_cac = 900            
+        x_min_cac = 1100
+        x_max_cac = 1250            
     return x_min_cac, x_max_cac
               
 def detect_object_cactus(image_data):
@@ -57,7 +60,7 @@ def detect_object_cactus(image_data):
         for x in range(x_min_cac, x_max_cac):
             for y in range(y_min_cac, y_max_cac):  
                 object_color = image_data[x, y]
-                if object_color > color_to_jump_dark:
+                if object_color > objects_color_light:
                     pyautogui.press("space")
                     count += 1
                     print(count)
@@ -66,7 +69,7 @@ def detect_object_cactus(image_data):
         for x in range(x_min_cac, x_max_cac):
             for y in range(y_min_cac, y_max_cac):  
                 object_color = image_data[x, y]
-                if object_color < color_to_jump_light:
+                if object_color < objects_color_dark:
                     pyautogui.press("space")
                     count += 1
                     print(count)
@@ -79,7 +82,7 @@ def detect_object_birds(image_data):
          for x in range(x_min_bird, x_max_bird):
             for y in range(y_min_bird, y_max_bird):           
                 object_color = image_data[x, y]               
-                if object_color > color_to_jump_dark:
+                if object_color > objects_color_light:
                     pyautogui.press("space")
                     count += 1
                     return
@@ -87,7 +90,7 @@ def detect_object_birds(image_data):
         for x in range(x_min_bird, x_max_bird):              
             for y in range(y_min_bird, y_max_bird):           
                 object_color = image_data[x, y]        
-                if object_color < color_to_jump_light:                   
+                if object_color < objects_color_dark:                   
                     pyautogui.press("space")
                     count += 1
                     return                        

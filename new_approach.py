@@ -5,7 +5,7 @@ import time
 count = 0
 light_theme = False
 dark_theme = False
-x_min_cac = 310                        
+x_min_cac = 290                        
 x_max_cac = 360
 y_min_cac = 790
 y_max_cac = 800
@@ -46,11 +46,14 @@ def change_jump_timing():
         x_min_cac = 360
         x_max_cac = 450        
     elif count > 45:
-        x_min_cac = 700
-        x_max_cac = 1100
+        x_min_cac = 800
+        x_max_cac = 1000
     elif count > 70:
         x_min_cac = 1050
-        x_max_cac = 1350            
+        x_max_cac = 1250 
+    elif count > 70:
+        x_min_cac = 1250
+        x_max_cac = 1350                    
     return x_min_cac, x_max_cac
               
 def detect_object_cactus(image_data):
